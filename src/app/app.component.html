@@ -1,0 +1,10 @@
+<form [formGroup]="userForm">
+  <aui-select-box id="myListBox" [list]="list" 
+    size="5" search="true" sort="true" 
+    formControlName="movies"></aui-select-box>
+
+  <br/>
+
+  <button type="submit" (click)="submit()"></button>
+
+</form>

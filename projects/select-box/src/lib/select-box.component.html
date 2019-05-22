@@ -1,0 +1,37 @@
+<div class="selectbox-container" id="{{elementId}}">
+    <div class="selectbox-left-area">
+        <input *ngIf="search" type="text" class="selectbox-search" [(ngModel)]="leftFilterText" />
+        <br/>
+        <select class="selectbox-left" [size]=size [(ngModel)]="leftSelectedList" multiple 
+            cdkDropList #fromList="cdkDropList" [cdkDropListConnectedTo]="[toList]"
+            (cdkDropListDropped)="removeOptionbyDrag($event)">
+            <option *ngFor="let leftListItem of originalList | listFilter:leftFilterText" cdkDrag>
+                {{leftListItem}}
+                <div *cdkDragPreview class="selectbox-preview">
+                    <span *ngFor="let leftPreview of leftSelectedList">{{leftPreview}}<br /></span>
+                </div>
+            </option>
+        </select>
+    </div>
+
+    <div class="selectbox-buttons-area">
+        <button type="button" (click)="addOption()">&gt;&gt;</button>
+        <br/>
+        <button type="button" (click)="removeOption()">&lt;&lt;</button>
+    </div>
+
+    <div class="selectbox-right-area">
+        <input *ngIf="search" type="text" class="selectbox-search" [(ngModel)]="rightFilterText" />
+        <br/>
+        <select class="selectbox-right" [size]=size [(ngModel)]="rightSelectedList" multiple 
+            cdkDropList #toList="cdkDropList" [cdkDropListConnectedTo]="[fromList]"
+            (cdkDropListDropped)="addOptionbyDrag($event)">
+            <option *ngFor="let rightListItem of selectedList | listFilter:rightFilterText" cdkDrag>
+                {{rightListItem}}
+                <div *cdkDragPreview class="selectbox-preview">
+                    <span *ngFor="let rightPreview of rightSelectedList">{{rightPreview}}<br /></span>
+                </div>    
+            </option>
+        </select>
+    </div>
+</div>
