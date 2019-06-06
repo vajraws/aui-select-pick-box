@@ -24,8 +24,6 @@ this.userForm = new FormGroup({
     'selectedItems': new FormControl({value: selectedList, disabled: true}),
 });
 
-{value: 'Nancy', disabled: true}
-
 <aui-select-box id="myListBox" [list]="list" 
     search="true" sort="true" selectAll="true"
     formControlName="selectedItems"></aui-select-box>
@@ -39,6 +37,6 @@ this.userForm = new FormGroup({
 ```
 
 
-
 [Demo](./aui-select-box-demo.gif)
+![Demo](https://github.com/vajraws/aui-select-pick-box/blob/master/aui-select-box-demo.gif?raw=true)
 
