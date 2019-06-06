@@ -6,16 +6,20 @@ import { FormGroup, FormControl } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  title = 'aui';
-
+export class AppComponent implements OnInit {
   userForm: FormGroup;
 
-  list:string[] = [];
+  list: string[] = [];
+
+  defaultValues: string[] = ['Django', 'Titanic'];
 
   ngOnInit(): void {
+    const selectedList: string[] = ['Django', 'The Beach', 'Blood Diamonds'];
+
     this.userForm = new FormGroup({
-      'movies': new FormControl(null)
+      'firstNameControl': new FormControl(null),
+      'movies': new FormControl({value: selectedList}),
+      'test': new FormControl(null)
     });
 
     this.list.push("Django");
@@ -33,7 +37,14 @@ export class AppComponent implements OnInit{
     this.list = this.list.sort();
   }
 
-  submit(){
+  submit() {
     console.log(this.userForm.value);
   }
+
+  submit2(value) {
+    console.log(value);
+  }
+
+  str: string = "A,B,C";
+
 }

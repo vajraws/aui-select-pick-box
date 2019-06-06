@@ -1,37 +1,54 @@
-<div class="selectbox-container" id="{{elementId}}">
-    <div class="selectbox-left-area">
-        <input *ngIf="search" type="text" class="selectbox-search" [(ngModel)]="leftFilterText" />
-        <br/>
-        <select class="selectbox-left" [size]=size [(ngModel)]="leftSelectedList" multiple 
-            cdkDropList #fromList="cdkDropList" [cdkDropListConnectedTo]="[toList]"
-            (cdkDropListDropped)="removeOptionbyDrag($event)">
-            <option *ngFor="let leftListItem of originalList | listFilter:leftFilterText" cdkDrag>
-                {{leftListItem}}
-                <div *cdkDragPreview class="selectbox-preview">
-                    <span *ngFor="let leftPreview of leftSelectedList">{{leftPreview}}<br /></span>
+<div class="select-box-list-container" >
+    <div class="vertical">
+        <input *ngIf="!disabled && search" type="text" class="selectbox-search" [(ngModel)]="leftFilterText" 
+            [disabled]="disabled" placeholder="Search.."/>
+        <div class="select-box-list vertical" cdkDropList #origList="cdkDropList" [cdkDropListConnectedTo]="[selList]" 
+        (cdkDropListDropped)="dragOntoLeftItems($event)">
+            <span class="select-box-list-item" *ngFor="let item of originalItems | listFilter:leftFilterText" 
+                [ngClass]="item.selected ? 'selected' : ''"
+                (click)="item.selected= (!disabled && !item.selected)" 
+                cdkDrag [cdkDragDisabled]="disabled || !item.selected">
+                {{item.value}}
+                <div *cdkDragPlaceholder class="select-box-placeholder vertical">
+                    <span *ngFor="let leftPreview of getLeftSelectedList()">{{leftPreview.value}}</span>
                 </div>
-            </option>
-        </select>
+                <div *cdkDragPreview class="select-box-preview vertical">
+                    <span *ngFor="let leftPreview of getLeftSelectedList()">{{leftPreview.value}}</span>
+                </div>
+            </span>
+        </div>
+        <div *ngIf="!disabled && selectAll"><input type="checkbox" (change)="selectAllOnLeft($event)"
+            class="selectbox-selectall" [disabled]="disabled"> Select All</div>
     </div>
 
-    <div class="selectbox-buttons-area">
-        <button type="button" (click)="addOption()">&gt;&gt;</button>
-        <br/>
-        <button type="button" (click)="removeOption()">&lt;&lt;</button>
+    <div class="select-box-buttons">
+        <button class="select-box-button" type="button" (click)="addItems()" 
+            [disabled]="disabled">&gt;</button>
+        <button class="select-box-button" type="button" (click)="removeItems()" 
+            [disabled]="disabled">&lt;</button>
     </div>
 
-    <div class="selectbox-right-area">
-        <input *ngIf="search" type="text" class="selectbox-search" [(ngModel)]="rightFilterText" />
-        <br/>
-        <select class="selectbox-right" [size]=size [(ngModel)]="rightSelectedList" multiple 
-            cdkDropList #toList="cdkDropList" [cdkDropListConnectedTo]="[fromList]"
-            (cdkDropListDropped)="addOptionbyDrag($event)">
-            <option *ngFor="let rightListItem of selectedList | listFilter:rightFilterText" cdkDrag>
-                {{rightListItem}}
-                <div *cdkDragPreview class="selectbox-preview">
-                    <span *ngFor="let rightPreview of rightSelectedList">{{rightPreview}}<br /></span>
-                </div>    
-            </option>
-        </select>
+
+    <div class="vertical">
+        <input *ngIf="!disabled && search" type="text" class="selectbox-search" [(ngModel)]="rightFilterText" 
+            [disabled]="disabled" placeholder="Search.."/>
+        <div class="select-box-list vertical" cdkDropList #selList="cdkDropList" [cdkDropListConnectedTo]="[origList]" 
+        (cdkDropListDropped)="dragOntoRightItems($event)">
+            <span class="select-box-list-item" *ngFor="let item of selectedItems | listFilter:rightFilterText" 
+                [ngClass]="item.selected ? 'selected' : ''"
+                (click)="item.selected= (!disabled && !item.selected)" 
+                cdkDrag [cdkDragDisabled]="disabled || !item.selected">
+                {{item.value}}
+                <div *cdkDragPlaceholder class="select-box-placeholder vertical">
+                    <span *ngFor="let rightPreview of getRightSelectedList()">{{rightPreview.value}}</span>
+                </div>
+                <div *cdkDragPreview class="select-box-preview vertical">
+                    <span *ngFor="let rightPreview of getRightSelectedList()">{{rightPreview.value}}</span>
+                </div>
+            </span>
+        </div>
+        <div *ngIf="!disabled && selectAll"><input type="checkbox" (change)="selectAllOnRight($event)" 
+            class="selectbox-selectall" [disabled]="disabled"> Select All</div>
     </div>
+
 </div>

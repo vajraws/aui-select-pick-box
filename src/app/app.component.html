@@ -1,10 +1,19 @@
 <form [formGroup]="userForm">
   <aui-select-box id="myListBox" [list]="list" 
-    size="5" search="true" sort="true" 
+    search="true" sort="true" selectAll="true"  
     formControlName="movies"></aui-select-box>
-
+   
   <br/>
 
-  <button type="submit" (click)="submit()"></button>
-
+  <button type="submit" (click)="submit()">Submit1</button>
 </form>
+ 
+<!-- <form #form="ngForm" (ngSubmit)="submit2(form.value)">
+  <aui-select-box id="myListBox" [list]="list" [value]="defaultValues"
+    search="true" sort="true" selectAll="true" 
+    name="movies" ngModel #movies="ngModel"></aui-select-box>
+  <button type="submit">Submit2</button>
+</form> -->
+
+
+<br/>

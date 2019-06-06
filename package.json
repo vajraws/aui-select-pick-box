@@ -26,6 +26,8 @@
     "rxjs": "~6.3.3",
     "tsickle": "^0.35.0",
     "tslib": "^1.9.0",
+    "webpack": "^4.32.2",
+    "webpack-dev-server": "^3.4.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
