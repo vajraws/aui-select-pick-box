@@ -1,6 +1,13 @@
 # aui-select-box
 
+```
+npm i aui-select-box
+```
+
 This component provides a multi select box with drag and drop feture between the lists. The list are searchable and sortable. It also has a select all feature. The styling can be customized using CSS.
+
+[Demo](./aui-select-box-demo.gif)
+![Demo](https://github.com/vajraws/aui-select-pick-box/blob/master/aui-select-box-demo.gif?raw=true)
 
 -list	    required	list of items to select from
 -search	    optional	option to turn on filtering on the list; default=false
@@ -37,6 +44,4 @@ this.userForm = new FormGroup({
 ```
 
 
-[Demo](./aui-select-box-demo.gif)
-![Demo](https://github.com/vajraws/aui-select-pick-box/blob/master/aui-select-box-demo.gif?raw=true)
 
